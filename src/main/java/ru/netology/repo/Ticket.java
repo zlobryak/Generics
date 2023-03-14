@@ -20,6 +20,8 @@ public class Ticket implements Comparable<Ticket> {
       return -1;
     } else if (this.getCost() > o.getCost()) {
       return 1;
-    } else return 0;
+    } else {
+      return 0;
+    }
   }
 }

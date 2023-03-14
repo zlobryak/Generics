@@ -44,4 +44,24 @@ public class Repository {
     }
     return null;
   }
+  public Ticket findByFrom(String from) {
+    for (Ticket ticket : repository){
+      if (ticket.getDepartureAirport().equals(from)){
+        return ticket;
+      }
+    }
+    return null;
+  }
+  public Ticket findByTo(String to) {
+    for (Ticket ticket : repository){
+      if (ticket.getArrivalAirport().equals(to)){
+        return ticket;
+      }
+    }
+    return null;
+  }
+  public Ticket[] findAll(){
+    return repository;
+  }
+
 }
