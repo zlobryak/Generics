@@ -100,4 +100,17 @@ class ManagerTest {
       manager.removeById(100);
     });
   }
+
+  @Test
+  void findAll() { // Тест сортировки с использованием компаратора
+    Comparator comparator = new Comparator();
+    manager.save(ticket5);
+    manager.save(ticket2);
+    manager.save(ticket3);
+    manager.save(ticket4);
+    manager.save(ticket1);
+    manager.save(ticket6);
+    Ticket[] expected = {ticket5, ticket6};
+    Assertions.assertArrayEquals(expected, manager.findAll("III", "JJJ", comparator));
+  }
 }

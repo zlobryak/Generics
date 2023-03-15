@@ -38,4 +38,22 @@ public class Manager {
     Arrays.sort(result);
     return result;
   }
+    public Ticket[] findAll(String from, String to, Comparator comparator){ //Название метода скопировано из Задания 2
+    Ticket[] result = new Ticket[0];
+    Ticket[] allTickets = repository.findAll();
+    for (Ticket allTicket : allTickets) {
+      if (allTicket.getDepartureAirport().equals(from)) {
+        if (allTicket.getArrivalAirport().equals(to)) {
+          Ticket[] tmp = new Ticket[result.length + 1];
+          for (int i = 0; i < result.length; i++) {
+            tmp[i] = result[i];
+          }
+          tmp[tmp.length - 1] = allTicket;
+          result = tmp;
+        }
+      }
+    }
+    Arrays.sort(result, comparator);
+    return result;
+  }
 }
