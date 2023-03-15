@@ -3,8 +3,6 @@ package ru.netology.repo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class RepositoryTest {
   Repository repository = new Repository();
   Ticket ticket1 = new Ticket(1, 100, "AAA", "BBB", 1000);
@@ -12,7 +10,7 @@ class RepositoryTest {
   Ticket ticket3 = new Ticket(3, 300, "EEE", "FFF", 3000);
   Ticket ticket4 = new Ticket(4, 400, "GGG", "HHH", 4000);
   Ticket ticket5 = new Ticket(5, 500, "III", "JJJ", 5000);
-  Ticket ticket6 = new Ticket(6, 600, "III", "JJJ", 6000);
+
 
   @Test
   void save() {
@@ -121,4 +119,5 @@ class RepositoryTest {
     repository.save(ticket5);
     Assertions.assertNull(repository.findByTo("KKK"));
   }
+
 }
