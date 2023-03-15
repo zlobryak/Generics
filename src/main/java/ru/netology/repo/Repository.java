@@ -3,7 +3,7 @@ package ru.netology.repo;
 public class Repository {
   private Ticket[] repository = new Ticket[0];
 
-  public void save(Ticket ticket) throws AlreadyExistsException {
+  public void save(Ticket ticket) {
     if (findByID(ticket.getId()) == null) {
       Ticket[] tmp = new Ticket[repository.length + 1];
       for (int i = 0; i < repository.length; i++) {
@@ -16,8 +16,8 @@ public class Repository {
     }
   }
 
-  public void removeById(int id) throws NotFoundException {
-    if (findByID(id) != null){
+  public void removeById(int id) {
+    if (findByID(id) != null) {
       Ticket[] tmp = new Ticket[repository.length - 1];
       int copyToindex = 0;
       for (Ticket ticket : repository) {
@@ -32,35 +32,34 @@ public class Repository {
     }
   }
 
-  public Ticket[] getRepository() {
-    return repository;
+  public Ticket findByID(int id) {
+    for (Ticket ticket : repository) {
+      if (ticket.getId() == id) {
+        return ticket;
+      }
+    }
+    return null;
   }
 
-  public Ticket findByID(int id) {
-    for (Ticket ticket : repository){
-      if (ticket.getId() == id){
-        return ticket;
-      }
-    }
-    return null;
-  }
   public Ticket findByFrom(String from) {
-    for (Ticket ticket : repository){
-      if (ticket.getDepartureAirport().equals(from)){
+    for (Ticket ticket : repository) {
+      if (ticket.getDepartureAirport().equals(from)) {
         return ticket;
       }
     }
     return null;
   }
+
   public Ticket findByTo(String to) {
-    for (Ticket ticket : repository){
-      if (ticket.getArrivalAirport().equals(to)){
+    for (Ticket ticket : repository) {
+      if (ticket.getArrivalAirport().equals(to)) {
         return ticket;
       }
     }
     return null;
   }
-  public Ticket[] findAll(){
+
+  public Ticket[] findAll() {
     return repository;
   }
 

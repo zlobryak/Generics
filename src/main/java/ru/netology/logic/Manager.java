@@ -1,37 +1,41 @@
 package ru.netology.logic;
 
-import ru.netology.repo.AlreadyExistsException;
-import ru.netology.repo.NotFoundException;
 import ru.netology.repo.Repository;
 import ru.netology.repo.Ticket;
+
+import java.util.Arrays;
 
 public class Manager {
 
   private Repository repository = new Repository();
 
-  public void save(Ticket ticket) throws AlreadyExistsException {
+  public void save(Ticket ticket) {
     repository.save(ticket);
   }
 
-  public void removeById(int id) throws NotFoundException {
+  public Ticket[] findAll(){
+    return repository.findAll();
+  }
+  public void removeById(int id) {
     repository.removeById(id);
   }
 
-  public Ticket[] findFromTo(String from, String to) throws NotFoundException {
-    Ticket[]result = new Ticket[0];
+  public Ticket[] findFromTo(String from, String to) {
+    Ticket[] result = new Ticket[0];
     Ticket[] allTickets = repository.findAll();
-    int indexToCopy = 0;
-    for (Ticket ticket : allTickets) {
-      if (repository.findByFrom(from) != null || repository.findByTo(to) != null) {
-        Ticket[] tmp = new Ticket[result.length + 1];
-        tmp[indexToCopy] = ticket;
-        indexToCopy++;
-      }else {
-        throw new NotFoundException("No tickets from" + from + "to" + to);
+    for (Ticket allTicket : allTickets) {
+      if (allTicket.getDepartureAirport().equals(from)) {
+        if (allTicket.getArrivalAirport().equals(to)) {
+          Ticket[] tmp = new Ticket[result.length + 1];
+          for (int i = 0; i < result.length; i++) {
+            tmp[i] = result[i];
+          }
+          tmp[tmp.length - 1] = allTicket;
+          result = tmp;
+        }
       }
     }
-    return result; //todo Results should be sorted.
+    Arrays.sort(result);
+    return result;
   }
-
-  //todo Add few more test for logic.
 }
